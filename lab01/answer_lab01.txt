@@ -1,0 +1,12 @@
+1. No
+2. 
+JOptionPane.showOptionDialog(
+    null,
+    "Do you agree?",
+    "Custom Options",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.QUESTION_MESSAGE,
+    null,
+    new Object[]{"I do", "I don’t"},   
+    "I do"                             
+);
