@@ -1,0 +1,3 @@
+1. Sau khi gọi swap(jungleDVD, cinderellaDVD), tiêu đề của hai đĩa vẫn giữ nguyên vì Java truyền tham trị (pass-by-value). Hai biến jungleDVD và cinderellaDVD chỉ truyền bản sao của tham chiếu vào hàm, nên việc hoán đổi trong hàm chỉ thay đổi bản sao này, không ảnh hưởng đến các biến thật bên ngoài.
+
+2. Sau khi gọi changeTitle(jungleDVD, cinderellaDVD.getTitle()), tiêu đề của jungleDVD thay đổi vì cả biến dvd trong hàm và jungleDVD đều trỏ đến cùng một đối tượng. Lệnh dvd.setTitle(title) làm thay đổi dữ liệu bên trong đối tượng thật, nên tiêu đề của jungleDVD cũng bị đổi theo.
