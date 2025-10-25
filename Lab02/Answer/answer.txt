@@ -1,1 +1,0 @@
-because both title and category have the same data type which is String, therefore java will not allow you to create constructor method to build a dvd by either title or category because the signature are not different according to constructor overloading principle.
