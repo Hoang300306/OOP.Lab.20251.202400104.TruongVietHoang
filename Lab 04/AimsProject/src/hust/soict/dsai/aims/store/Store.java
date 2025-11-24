@@ -1,43 +1,46 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+
+import java.util.ArrayList;
+import hust.soict.dsai.aims.media.Media;
 
 public class Store {
-    public static final int MAX_NUMBERS_ORDERED = 20;
-    private DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
-    private int qtyInStore = 0; 
+    private ArrayList<Media> itemsInStore = new ArrayList<>();
 
-    public void addDVD(DigitalVideoDisc disc) {
-        if (qtyInStore < MAX_NUMBERS_ORDERED) {
-            itemsInStore[qtyInStore] = disc;
-            qtyInStore++;
-            System.out.println("The DVD \"" + disc.getTitle() + "\" has been added to the store.");
+    public void addMedia(Media media) {
+        if (itemsInStore.add(media)) {
+            System.out.println("The media \"" + media.getTitle() + "\" has been added to the store.");
         } else {
-            System.out.println("The store is full. Cannot add more DVDs.");
+            System.out.println("Failed to add the media \"" + media.getTitle() + "\" to the store.");
         }
     }
 
-    public void removeDVD(DigitalVideoDisc disc) {
-        boolean found = false;
-        for (int i = 0; i < qtyInStore; i++) {
-            if (itemsInStore[i].equals(disc)) {
-                found = true;
-                for (int j = i; j < qtyInStore - 1; j++) {
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-                itemsInStore[qtyInStore - 1] = null;
-                qtyInStore--;
-                System.out.println("The DVD \"" + disc.getTitle() + "\" has been removed from the store.");
-                break;
+    public void removeMediaByTitle(String title) {
+        Media found = searchByTitle(title);
+
+        if (found != null) {
+            itemsInStore.remove(found);
+            System.out.println("The media \"" + found.getTitle() + "\" has been removed from the store.");
+        } else {
+            System.out.println("No media with title \"" + title + "\" was found in the store.");
+        }
+    }
+
+    public Media searchByTitle(String title) {
+        for (Media m : itemsInStore) {
+            if (m.getTitle().equalsIgnoreCase(title)) {
+                return m;
             }
         }
-        if (!found) {
-            System.out.println("The DVD \"" + disc.getTitle() + "\" was not found in the store.");
-        }
+        return null;
     }
+
     public void printStore() {
-        System.out.println("\n*** DVDs available in store ***");
-        for (int i = 0; i < qtyInStore; i++) {
-            System.out.println((i + 1) + ". " + itemsInStore[i].getTitle());
+        System.out.println("\n*** Items currently available in store ***");
+        int count = 1;
+        for (Media media : itemsInStore) {
+            System.out.println(count + ". " + media.toString());
+            count++;
         }
+        System.out.println("*******************************************");
     }
 }
